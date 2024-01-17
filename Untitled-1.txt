@@ -1,0 +1,166 @@
+export const calculateUsaSize = (bustSize, bandSize) => {
+    if (isNaN(parseFloat(bustSize)) || isNaN(parseInt(bandSize))) {
+        throw new Error('Invalid Input - Please enter numeric values for Bust Size and Band Size');
+    }
+    bustSize = parseInt(bustSize);
+    // Determine U.S. Cup Size from Bust Size
+    let usaCupSize;
+    switch (true) {
+        case bustSize >= 88:
+            usaCupSize = "GG";
+            break;
+        case bustSize >= 80:
+            usaCupSize = "G";
+            break;
+        case bustSize >= 76:
+            usaCupSize = "M";
+            break;
+        case bustSize >= 72:
+            usaCupSize = "L";
+            break;
+        default:
+            usaCupSize = "XL";
+            break;
+    }
+    // Return US Average Body Measurements with Proper Spacing
+    let usMeasurement = `US ${usaCupSize}, Bust:
+                                    ${bustSize} inches`;
+    return usMeasurement;
+};
+// Function to generate a string of measurements based on user input
+export function generateMeasurementsString(userData) {
+    let measurementString = "";
+    for (let key in userData) {
+        if (userData[key] !== null && userData[key] !== "") {
+                measurementString += `${capitalizeFirstLetter(
+                    key)}: ${userData[key]} \n`
+        };
+    }
+    return measurementString;
+
+}
+
+
+
+
+export function calculateSpainAndFranceSize(bustSize, bandSize) {
+    // Calculate the difference in cm for cup size
+    const cupDifference = bustSize - bandSize;
+
+    // Determine cup size based on the difference in cm
+    let spainCupSize;
+    switch (true) {
+        case cupDifference >= 1 && cupDifference <= 5:
+            spainCupSize = 'A';
+            break;
+        case cupDifference >= 6 && cupDifference <= 10:
+            spainCupSize = 'B';
+            break;
+        case cupDifference >= 11 && cupDifference <= 15:
+            spainCupSize = 'C';
+            break;
+        case cupDifference >= 16 && cupDifference <= 20:
+            spainCupSize = 'D';
+            break;
+        case cupDifference >= 21 && cupDifference <= 25:
+            spainCupSize = 'E';
+            break;
+        case cupDifference >= 26 && cupDifference <= 30:
+            spainCupSize = 'F';
+            break;
+        case cupDifference >= 31 && cupDifference <= 35:
+            spainCupSize = 'G';
+            break;
+        case cupDifference >= 36 && cupDifference <= 40:
+            spainCupSize = 'H';
+            break;
+        case cupDifference >= 41 && cupDifference <= 45:
+            spainCupSize = 'I';
+            break;
+        case cupDifference >= 46 && cupDifference <= 50:
+            spainCupSize = 'J';
+            break;
+        default:
+            spainCupSize = 'unknown';
+            break;
+    }
+
+    // Include band size in the result string
+    const spainFranceBraSize = `${bandSize} ${spainCupSize}`;
+
+    // Return the Spain/France Bra Size with proper spacing
+    return spainFranceBraSize;
+
+
+
+
+
+    export const calculateUKSize = (bustSize, bandSize) => {
+    // Calculate cup size
+    let cupSize = bustSize - bandSize;
+
+    // Simplified UK Band Size (using underbust measurement directly)
+    let ukBandSize = Math.round(bandSize);
+
+    // Calculate UK Cup Size using the inch difference between bust and band
+    let ukCupSize;
+    switch (true) {
+        case cupSize >= 4:
+            ukCupSize = 'H';
+            break;
+        case cupSize === 3:
+            ukCupSize = 'G';
+            break;
+        case cupSize === 2:
+            ukCupSize = 'F';
+            break;
+        case cupSize === 1:
+            ukCupSize = 'E';
+            break;
+        case cupSize === 0:
+            ukCupSize = 'DD';
+            break;
+        case cupSize === -1:
+            ukCupSize = 'D';
+            break;
+        case cupSize === -2:
+            ukCupSize = 'C';
+            break;
+        case cupSize === -3:
+            ukCupSize = 'B';
+            break;
+        case cupSize === -4:
+            ukCupSize = 'A';
+            break;
+        case cupSize <= -5:
+        default:
+            ukCupSize = 'AA';
+            break;
+    }
+
+    // Calculate and return the UK Bra Size with proper spacing
+    let ukBraSize = `${ukBandSize}${ukCupSize}`;
+    return ukBraSize;
+}
+
+
+
+
+else if (country === 'EUR/GEP/JAP') {
+  // Replace the following values with the appropriate sizing guidelines in inches
+  const maxBustSize = 110;
+  const minBandSize = 65;
+
+  if (parseFloat(bustSize) > maxBustSize || parseFloat(bandSize) < minBandSize) {
+    setError('Invalid size for Europe');
+    setTimeout(() => {
+      setError('');
+    }, 1000);
+  } else {
+    const result = Eur(bustSize, bandSize);
+    setBraSize(result);
+    console.log(result);
+    setBustSize('');
+    setBandSize('');
+  }
+}
